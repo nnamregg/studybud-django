@@ -1,22 +1,29 @@
 {% for room in rooms %}
+{% load static %}
 <div class="roomListRoom">
     <div class="roomListRoom__header">
+        {% if room.host != null %}
         <a href="{% url 'user-profile' room.host.id %}" class="roomListRoom__author">
             <div class="avatar avatar--small">
-                <img src="https://randomuser.me/api/portraits/women/11.jpg" />
+                <img src="{{room.host.avatar.url}}" />
             </div>
             <span>@{{room.host.username}}</span>
         </a>
+        {% else %}
+        <span class="roomListRoom__author">
+            <div class="avatar avatar--small">
+                <img src="{% static 'images/avatar.svg' %}" />
+            </div>
+            <span>deleted-user</span>
+        </span>
+        {% endif %}
+
         <div class="roomListRoom__actions">
             <span>{{room.created | timesince}} ago</span>
         </div>
     </div>
     <div class="roomListRoom__content">
         <a href="{% url 'room' room.id %}">{{room.name}}</a>
-        {% comment %} <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur ducimus harum dolorem, obcaecati
-            mollitia omnis quasi aut consequuntur enim itaque labore.
-        </p> {% endcomment %}
     </div>
     <div class="roomListRoom__meta">
         <a href="{% url 'room' room.id %}" class="roomListRoom__joined">

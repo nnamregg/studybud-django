@@ -1,5 +1,9 @@
 # 
+env/
 *.old
+avatars/**
+!avatars/.keep
+apiexample.html
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
